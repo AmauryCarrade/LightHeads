@@ -12,3 +12,7 @@ Permissions:
  - `heads.give`: allows an user to give a head to another player using `/head <headOwner> <receiver>`. Default: op.
 
 Builds available [on my jenkins server](http://jenkins.carrade.eu/job/LightHeads/).
+
+
+This plugin is subject to the terms of the Mozilla Public License, v. 2.0.  
+If a copy of the MPL was not distributed with this plugin, you can obtain one [here](http://mozilla.org/MPL/2.0/).
