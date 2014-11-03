@@ -1,0 +1,114 @@
+# 
+# ## Welcome in the Balls of Steel configuration file ##
+# 
+# 
+# About the "sound" configuration, the format is always the same:
+# sound:
+#     name:   The name of the sound. Names: see http://l.carrade.eu/bukkit-sounds . Set to "NONE" to disable.
+#     volume: The volume of the sound. 1 is the normal volume. You can use a decimal value.
+#     pitch:  The pitch of the sound.  1 is the normal pitch.  You can use a decimal value.
+# 
+
+
+# Available languages: en_US, fr_FR.
+lang: en_US
+
+
+
+# Specify here the world where the game will take place.
+# If this is left empty, the world will be automatically detected, based on the
+# teams' spawn points, but the “waiting” boss bar, displayed when the game is
+# not started, will be displayed to everyone on the server.
+world: ""
+
+
+
+# The duration of the game.
+# Format: "mm", "mm:ss" or "hh:mm:ss".
+duration: "60"
+
+
+
+# Use the boss bar to display the time left of the game, and the winners?
+# If the bar is not used with this enabled, check if the BarAPI plugin is installed.
+# Available here: http://dev.bukkit.org/bukkit-plugins/bar-api/ .
+useBar: true
+
+
+
+start:
+    sound:
+        name: NONE
+        volume: 1
+        pitch: 1
+
+
+
+diamonds:
+    sounds:
+        # Played when a team place some diamonds in the chest
+        countIncrease:
+            name: SUCCESSFUL_HIT
+            volume: 1
+            pitch: 3
+        
+        # Played when a team take some diamonds from the chest
+        countDecrease:
+            name: NONE
+            volume: 1
+            pitch: 0.2
+
+
+
+# This is given to the player when the game start and when they respawn.
+equipment:
+    food: true      # 1 stack of steaks
+    blocks: true    # 2 stacks of dirt blocks
+    tools: true     # pickaxe, axe, shovel
+    sword: false    # sword
+    bow: true       # infinity bow, one arrow
+    armor: "none"   # "none", "weak" (leather), "normal" (chainmail), "strong" (iron) or "strong+" (diamond).
+
+
+
+# If true, the name of the players will be colorized according to the teams.
+colorizeChat: true
+
+
+
+teams-options:
+    canSeeFriendlyInvisibles: true
+    allowFriendlyFire: true
+    
+    # 0 = unlimited.
+    maxPlayersPerTeam: 0
+
+
+
+# Controls the behavior of the /bos finish command
+finish:
+    auto:
+        do: true  # Execute /bos finish automatically a few seconds after the end of the game?
+        timeAfterEnd: 3  # The command will be executed this amount of seconds after the last death.
+    
+    message: true  # If true, the name of the winner(s) will be broadcasted.
+    fireworks:
+        enabled: true  # If true, some fireworks will be launched at the location of the winners.
+        duration: 10   # In seconds.
+        areaSize: 6    # The size of the square, centered on each player, where the fireworks will be launched.
+
+
+
+# Log the private team-chat in the console?
+logTeamChat: false
+
+
+
+# Use this to pre-register the teams.
+# Format:
+#     - color
+#  -- OR --
+#     - color,name
+
+teams:
+    -

@@ -1,0 +1,27 @@
+name: BallsOfSteel
+description: Balls of Steel plugin
+main: eu.carrade.amaury.LightHeads.LightHeads
+version: 0.1 §cdev§r
+author: "Amaury Carrade"
+
+commands:
+   head:
+      description: Gives a player head.
+      usage: /<command> [headOwner] [receiver]
+
+permissions:
+    heads.*:
+        description: Give access to all LightHeads commands.
+        children:
+            heads.give: true
+            heads.self: true
+            heads.others: true
+    heads.give:
+        description: Allows an user to give a head to another player using /head <headOwner> <receiver>.
+        default: op
+    heads.self:
+        description: Allows an user to receive his own head with /head.
+        default: true
+    heads.others:
+        description: Allows an user to receive any head using /head <headOwner>.
+        default: op
