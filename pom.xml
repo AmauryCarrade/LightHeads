@@ -2,9 +2,9 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>eu.carrade.amaury</groupId>
   <artifactId>LightHeads</artifactId>
-  <version>0.1-SNAPSHOT</version>
+  <version>1.0</version>
   <name>LightHeads</name>
-  <description>Player heads, with a simple command</description>
+  <description>Bukkit plugin to easily receive player heads.</description>
   <url>https://github.com/AmauryCarrade/LightHeads/</url>
   <issueManagement>
   	<system>GitHub</system>

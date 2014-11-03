@@ -1,7 +1,7 @@
 name: LightHeads
 description: Give them their head! - Bukkit plugin to easily receive player heads.
 main: eu.carrade.amaury.LightHeads.LightHeads
-version: 0.1
+version: 1.0
 author: "Amaury Carrade"
 
 commands:
