@@ -31,10 +31,9 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LightHeads extends JavaPlugin {
 	
-	
 	@Override
 	public void onEnable() {
-		
+		this.saveDefaultConfig();
 	}
 	
 	@Override
@@ -51,12 +50,12 @@ public final class LightHeads extends JavaPlugin {
 					receiver = (Player) sender;
 				}
 				else {
-					sender.sendMessage(ChatColor.RED + "You are not allowed to do that.");
+					sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.disallowed"));
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED + "This can only be executed as a player.");
+				sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.onlyAsAPlayer"));
 				return true;
 			}
 		}
@@ -67,12 +66,12 @@ public final class LightHeads extends JavaPlugin {
 					receiver = (Player) sender;
 				}
 				else {
-					sender.sendMessage(ChatColor.RED + "You are not allowed to do that.");
+					sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.disallowed"));
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED + "This can only be executed as a player.");
+				sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.onlyAsAPlayer"));
 				return true;
 			}
 		}
@@ -81,12 +80,12 @@ public final class LightHeads extends JavaPlugin {
 				ownerName = args[0];
 				receiver = getServer().getPlayer(args[1]);
 				if(receiver == null) {
-					sender.sendMessage(ChatColor.RED + "The player " + args[1] + " is not online.");
+					sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.notOnline").replace("{player}", args[1]));
 					return true;
 				}
 			}
 			else {
-				sender.sendMessage(ChatColor.RED + "You are not allowed to do that.");
+				sender.sendMessage(ChatColor.RED + getConfig().getString("i18n.disallowed"));
 				return true;
 			}
 		}
@@ -99,10 +98,12 @@ public final class LightHeads extends JavaPlugin {
 		if(receiver.getInventory().addItem(head).size() != 0) {
 			// Inventory was full
 			receiver.getWorld().dropItem(receiver.getLocation(), head);
-			sender.sendMessage(ChatColor.GRAY + "Your inventory is full: the head was dropped at your feets.");
+			sender.sendMessage(ChatColor.GRAY + getConfig().getString("i18n.inventoryFull"));
 		}
 		else {
-			receiver.playSound(receiver.getLocation(), Sound.ITEM_PICKUP, 0.2f, 1.8f);
+			if(getConfig().getBoolean("pickupSound")) {
+				receiver.playSound(receiver.getLocation(), Sound.ITEM_PICKUP, 0.2f, 1.8f);
+			}
 		}
 		
 		return true;

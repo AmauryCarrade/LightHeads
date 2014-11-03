@@ -1,0 +1,12 @@
+# Configuration file of the plugin LightHeads
+
+# Play a pickup sound when the head is given and fit in the inventory?
+pickupSound: true
+
+# If you want to translate the plugin.
+# Don't translate the values {between braces}.
+i18n:
+    disallowed: "You are not allowed to do that."
+    onlyAsAPlayer: "This can only be executed as a player."
+    notOnline: "The player {player} is not online."
+    inventoryFull: "Your inventory is full: the head was dropped at your feets."
