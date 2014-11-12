@@ -3,8 +3,9 @@
 # Play a pickup sound when the head is given and fit in the inventory?
 pickupSound: true
 
-# The probability that a head drops when a player die. 0 = never, 1 = always.
-dropProbabilityOnDeath: 0.2
+# The probability that a head drops when a player with the permission “heads.deathDrop” die.
+# 0 = never, 1 = always.
+dropOnDeathProbability: 0.2
 
 # If you want to translate the plugin.
 # Don't translate the values {between braces}.
@@ -12,4 +13,4 @@ i18n:
     disallowed: "You are not allowed to do that."
     onlyAsAPlayer: "This can only be executed as a player."
     notOnline: "The player {player} is not online."
-    inventoryFull: "Your inventory is full: the head was dropped at your feets."
+    inventoryFull: "Your inventory is full: the head was dropped at your feet."

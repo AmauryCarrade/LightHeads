@@ -5,11 +5,22 @@ Give them their head!
 
 Command: `/head [headOwner] [receiver]`
 
-Permissions:
+#### Permissions
 
- - `heads.self: allows an user to receive his own head with `/head`. Default: everyone.
- - `heads.others`: allows an user to receive any head using `/head <headOwner>`. Default: op.
- - `heads.give`: allows an user to give a head to another player using `/head <headOwner> <receiver>`. Default: op.
+ - `heads.self`: allows an user to receive his own head with `/head`.  
+   *Default: everyone.*
+ - `heads.others`: allows an user to receive any head using `/head <headOwner>`.  
+   *Default: operators.*
+ - `heads.give`: allows an user to give a head to another player using `/head <headOwner> <receiver>`.  
+   *Default: operators.*
+ - `heads.deathDrop`: if a player with this permission die, his head will be dropped, according to the probability set in the config file.  
+   *Default: everyone.*
+
+#### Options
+
+ - `pickupSound`: if true, a pickup sound will be played when the head is given and fit in the inventory.
+ - `dropOnDeathProbability`: the probability that a head drops when a player with the permission `heads.deathDrop` die.  
+   0 = never; 1 = always.
 
 Builds available [on my jenkins server](http://jenkins.carrade.eu/job/LightHeads/).
 

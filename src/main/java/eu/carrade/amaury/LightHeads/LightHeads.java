@@ -23,7 +23,7 @@ public final class LightHeads extends JavaPlugin {
 	public static final String PERM_GIVE       = "heads.give";
 	public static final String PERM_DEATH_DROP = "heads.deathDrop";
 	
-	double  dropProbabilityOnDeath;
+	double  dropOnDeathProbability;
 	boolean pickupSound;
 	
 	@Override
@@ -31,9 +31,9 @@ public final class LightHeads extends JavaPlugin {
 		this.saveDefaultConfig();
 		
 		pickupSound = getConfig().getBoolean("pickupSound", true);
-		dropProbabilityOnDeath = Math.min(Math.abs(getConfig().getDouble("dropProbabilityOnDeath", 0.2d)), 1.0d);
+		dropOnDeathProbability = Math.min(Math.abs(getConfig().getDouble("dropOnDeathProbability", 0.2d)), 1.0d);
 		
-		if(dropProbabilityOnDeath > 0) {
+		if(dropOnDeathProbability > 0) {
 			getServer().getPluginManager().registerEvents(new HeadsListener(this), this);
 		}
 	}
@@ -131,7 +131,7 @@ public final class LightHeads extends JavaPlugin {
 	 * 
 	 * @return The probability.
 	 */
-	public double getDropProbabilityOnDeath() {
-		return dropProbabilityOnDeath;
+	public double getDropOnDeathProbability() {
+		return dropOnDeathProbability;
 	}
 }
