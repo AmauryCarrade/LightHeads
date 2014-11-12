@@ -18,6 +18,10 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LightHeads extends JavaPlugin {
 	
+	public static final String PERM_GET_SELF   = "heads.self";
+	public static final String PERM_GET_OTHERS = "heads.others";
+	public static final String PERM_GIVE       = "heads.give";
+	
 	double  dropProbabilityOnDeath;
 	boolean pickupSound;
 	
@@ -42,7 +46,7 @@ public final class LightHeads extends JavaPlugin {
 		
 		if(args.length == 0) { // /head
 			if(sender instanceof Player) {
-				if(((Player) sender).hasPermission("heads.self")) {
+				if(((Player) sender).hasPermission(PERM_GET_SELF)) {
 					ownerName = ((Player) sender).getName();
 					receiver = (Player) sender;
 				}
@@ -58,7 +62,7 @@ public final class LightHeads extends JavaPlugin {
 		}
 		else if(args.length == 1) { // /head <headOwner>
 			if(sender instanceof Player) {
-				if(((Player) sender).hasPermission("heads.others")) {
+				if(((Player) sender).hasPermission(PERM_GET_OTHERS)) {
 					ownerName = args[0];
 					receiver = (Player) sender;
 				}
@@ -73,7 +77,7 @@ public final class LightHeads extends JavaPlugin {
 			}
 		}
 		else { // /head <headOwner> <receiver>
-			if(sender.hasPermission("heads.give")) {
+			if(sender.hasPermission(PERM_GIVE)) {
 				ownerName = args[0];
 				receiver = getServer().getPlayer(args[1]);
 				if(receiver == null) {
