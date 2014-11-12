@@ -3,6 +3,9 @@
 # Play a pickup sound when the head is given and fit in the inventory?
 pickupSound: true
 
+# The probability that a head drops when a player die. 0 = never, 1 = always.
+dropProbabilityOnDeath: 0.2
+
 # If you want to translate the plugin.
 # Don't translate the values {between braces}.
 i18n:

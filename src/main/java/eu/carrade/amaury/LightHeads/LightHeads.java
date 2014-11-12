@@ -18,9 +18,19 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class LightHeads extends JavaPlugin {
 	
+	double  dropProbabilityOnDeath;
+	boolean pickupSound;
+	
 	@Override
 	public void onEnable() {
 		this.saveDefaultConfig();
+		
+		pickupSound = getConfig().getBoolean("pickupSound", true);
+		dropProbabilityOnDeath = Math.min(Math.abs(getConfig().getDouble("dropProbabilityOnDeath", 0.2d)), 1.0d);
+		
+		if(dropProbabilityOnDeath > 0) {
+			getServer().getPluginManager().registerEvents(new HeadsListener(this), this);
+		}
 	}
 	
 	@Override
@@ -77,10 +87,7 @@ public final class LightHeads extends JavaPlugin {
 			}
 		}
 		
-		ItemStack head = new ItemStack(Material.SKULL_ITEM, 1, (short) 3);
-		SkullMeta sm = (SkullMeta) head.getItemMeta();
-		sm.setOwner(ownerName);
-		head.setItemMeta(sm);
+		ItemStack head = getHead(ownerName, 1);
 		
 		if(receiver.getInventory().addItem(head).size() != 0) {
 			// Inventory was full
@@ -88,11 +95,38 @@ public final class LightHeads extends JavaPlugin {
 			sender.sendMessage(ChatColor.GRAY + getConfig().getString("i18n.inventoryFull"));
 		}
 		else {
-			if(getConfig().getBoolean("pickupSound")) {
+			if(pickupSound) {
 				receiver.playSound(receiver.getLocation(), Sound.ITEM_PICKUP, 0.2f, 1.8f);
 			}
 		}
 		
 		return true;
+	}
+	
+	/**
+	 * Returns an ItemStack representing {@code amount} heads of {@code owner}.
+	 * 
+	 * @param owner The owner.
+	 * @param amount The amount.
+	 * 
+	 * @return The head.
+	 */
+	public ItemStack getHead(String owner, int amount) {
+		ItemStack head = new ItemStack(Material.SKULL_ITEM, amount, (short) 3);
+		
+		SkullMeta sm = (SkullMeta) head.getItemMeta();
+		sm.setOwner(owner);
+		head.setItemMeta(sm);
+		
+		return head;
+	}
+	
+	/**
+	 * Returns the probability a head drop when a player die (between 0.0 and 1.0).
+	 * 
+	 * @return The probability.
+	 */
+	public double getDropProbabilityOnDeath() {
+		return dropProbabilityOnDeath;
 	}
 }
