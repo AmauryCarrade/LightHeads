@@ -21,6 +21,7 @@ public final class LightHeads extends JavaPlugin {
 	public static final String PERM_GET_SELF   = "heads.self";
 	public static final String PERM_GET_OTHERS = "heads.others";
 	public static final String PERM_GIVE       = "heads.give";
+	public static final String PERM_DEATH_DROP = "heads.deathDrop";
 	
 	double  dropProbabilityOnDeath;
 	boolean pickupSound;

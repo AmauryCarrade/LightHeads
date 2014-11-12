@@ -30,7 +30,7 @@ public final class HeadsListener implements Listener {
 	 */
 	@EventHandler(ignoreCancelled = true, priority = EventPriority.MONITOR)
 	public void onPlayerDeath(PlayerDeathEvent ev) {
-		if(random.nextDouble() <= p.getDropProbabilityOnDeath()) {
+		if(random.nextDouble() <= p.getDropProbabilityOnDeath() && ev.getEntity().hasPermission(LightHeads.PERM_DEATH_DROP)) {
 			ev.getEntity().getWorld().dropItem(ev.getEntity().getLocation(), p.getHead(ev.getEntity().getName(), 1));
 		}
 	}

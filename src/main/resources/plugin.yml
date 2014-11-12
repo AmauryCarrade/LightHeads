@@ -16,6 +16,7 @@ permissions:
             heads.give: true
             heads.self: true
             heads.others: true
+            heads.deathDrop: true
     heads.give:
         description: Allows an user to give a head to another player using /head <headOwner> <receiver>.
         default: op
@@ -25,3 +26,6 @@ permissions:
     heads.others:
         description: Allows an user to receive any head using /head <headOwner>.
         default: op
+    heads.deathDrop:
+        description: If a player with this permission die, his head will be dropped, according to the probability set in the config file.
+        default: true
