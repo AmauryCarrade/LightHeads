@@ -24,8 +24,8 @@ public final class LightHeads extends JavaPlugin
     public static final String PERM_GIVE = "heads.give";
     public static final String PERM_DEATH_DROP = "heads.deathDrop";
 
-    double dropOnDeathProbability;
-    boolean pickupSound;
+    private double dropOnDeathProbability;
+    private boolean pickupSound;
 
     @Override
     public void onEnable()
