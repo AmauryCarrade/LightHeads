@@ -9,10 +9,16 @@ package eu.carrade.amaury.LightHeads;
 import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.plugin.java.JavaPlugin;
+
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 public final class LightHeads extends JavaPlugin
@@ -21,6 +27,51 @@ public final class LightHeads extends JavaPlugin
     public static final String PERM_GET_OTHERS = "heads.others";
     public static final String PERM_GIVE = "heads.give";
     public static final String PERM_DEATH_DROP = "heads.deathDrop";
+
+    private static final String[] MHF_HEADS = new String[]{
+            "MHF_Alex",
+            "MHF_Blaze",
+            "MHF_CaveSpider",
+            "MHF_Chicken",
+            "MHF_Cow",
+            "MHF_Creeper",
+            "MHF_Enderman",
+            "MHF_Ghast",
+            "MHF_Golem",
+            "MHF_Herobrine",
+            "MHF_Lava_slime",
+            "MHF_Mushroom_cow",
+            "MHF_Ocelot",
+            "MHF_Pig",
+            "MHF_PigZombie",
+            "MHF_Sheep",
+            "MHF_Skeleton",
+            "MHF_Slime",
+            "MHF_Spider",
+            "MHF_Squid",
+            "MHF_Steve",
+            "MHF_Villager",
+            "MHF_WSkeleton",
+            "MHF_Zombie",
+            "MHF_Cactus",
+            "MHF_Cake",
+            "MHF_Chest",
+            "MHF_CoconutB",
+            "MHF_CoconutG",
+            "MHF_Melon",
+            "MHF_OakLog",
+            "MHF_Present1",
+            "MHF_Present2",
+            "MHF_Pumpkin",
+            "MHF_TNT",
+            "MHF_TNT2",
+            "MHF_ArrowUp",
+            "MHF_ArrowDown",
+            "MHF_ArrowLeft",
+            "MHF_ArrowRight",
+            "MHF_Exclamation",
+            "MHF_Question",
+    };
 
     private double dropOnDeathProbability;
     private boolean pickupSound;
@@ -130,12 +181,27 @@ public final class LightHeads extends JavaPlugin
         return true;
     }
 
+    @Override
+    public List<String> onTabComplete(CommandSender sender, Command command, String alias, String[] args)
+    {
+        if (!command.getName().equalsIgnoreCase("head"))
+        {
+            return super.onTabComplete(sender, command, alias, args);
+        }
+
+        if (!sender.hasPermission(PERM_GET_OTHERS) && !sender.hasPermission(PERM_GIVE)) return null;
+
+        return Stream.concat(
+                Bukkit.getOnlinePlayers().stream().map(HumanEntity::getName),
+                Arrays.stream(MHF_HEADS)
+        ).collect(Collectors.toList());
+    }
+
     /**
      * Returns an ItemStack representing {@code amount} heads of {@code owner}.
      *
-     * @param owner The owner.
+     * @param owner  The owner.
      * @param amount The amount.
-     *
      * @return The head.
      */
     ItemStack getHead(final OfflinePlayer owner, final int amount)
