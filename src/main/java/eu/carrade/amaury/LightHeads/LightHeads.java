@@ -6,9 +6,7 @@
 
 package eu.carrade.amaury.LightHeads;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Material;
-import org.bukkit.Sound;
+import org.bukkit.*;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
@@ -46,7 +44,7 @@ public final class LightHeads extends JavaPlugin
     {
         if (!cmd.getName().equalsIgnoreCase("head")) return false;
 
-        String ownerName;
+        OfflinePlayer owner;
         Player receiver;
 
         // /head
@@ -56,7 +54,7 @@ public final class LightHeads extends JavaPlugin
             {
                 if (sender.hasPermission(PERM_GET_SELF))
                 {
-                    ownerName = sender.getName();
+                    owner = (OfflinePlayer) sender;
                     receiver = (Player) sender;
                 }
                 else
@@ -78,7 +76,7 @@ public final class LightHeads extends JavaPlugin
             {
                 if (sender.hasPermission(PERM_GET_OTHERS))
                 {
-                    ownerName = args[0];
+                    owner = getServer().getOfflinePlayer(args[0]);
                     receiver = (Player) sender;
                 }
                 else
@@ -98,7 +96,7 @@ public final class LightHeads extends JavaPlugin
         {
             if (sender.hasPermission(PERM_GIVE))
             {
-                ownerName = args[0];
+                owner = getServer().getOfflinePlayer(args[0]);
                 receiver = getServer().getPlayer(args[1]);
                 if (receiver == null)
                 {
@@ -113,7 +111,7 @@ public final class LightHeads extends JavaPlugin
             }
         }
 
-        ItemStack head = getHead(ownerName, 1);
+        final ItemStack head = getHead(owner, 1);
 
         if (receiver.getInventory().addItem(head).size() != 0)
         {
@@ -140,12 +138,12 @@ public final class LightHeads extends JavaPlugin
      *
      * @return The head.
      */
-    public ItemStack getHead(String owner, int amount)
+    ItemStack getHead(final OfflinePlayer owner, final int amount)
     {
-        ItemStack head = new ItemStack(Material.SKULL_ITEM, amount, (short) 3);
+        final ItemStack head = new ItemStack(Material.PLAYER_HEAD, amount);
 
-        SkullMeta sm = (SkullMeta) head.getItemMeta();
-        sm.setOwner(owner);
+        final SkullMeta sm = (SkullMeta) head.getItemMeta();
+        sm.setOwningPlayer(owner);
         head.setItemMeta(sm);
 
         return head;
@@ -156,7 +154,7 @@ public final class LightHeads extends JavaPlugin
      *
      * @return The probability.
      */
-    public double getDropOnDeathProbability()
+    double getDropOnDeathProbability()
     {
         return dropOnDeathProbability;
     }

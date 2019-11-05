@@ -34,7 +34,7 @@ public final class HeadsListener implements Listener
     {
         if (random.nextDouble() <= p.getDropOnDeathProbability() && ev.getEntity().hasPermission(LightHeads.PERM_DEATH_DROP))
         {
-            ev.getEntity().getWorld().dropItem(ev.getEntity().getLocation(), p.getHead(ev.getEntity().getName(), 1));
+            ev.getEntity().getWorld().dropItem(ev.getEntity().getLocation(), p.getHead(ev.getEntity(), 1));
         }
     }
 }
